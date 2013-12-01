@@ -1,0 +1,84 @@
+/*
+ * Tasks.java
+ * 
+ */
+
+package dcsft.schedule.tasks;
+
+import java.io.*;
+import java.util.*;
+import java.lang.Math.*;
+import dcsft.schedule.tasks.*;
+
+public class Tasks {
+	public Tasks(int n) {
+        TaskList = new ArrayList<Task>(n);
+        Integer cnt, limit;
+        maxLimit = 0;
+        
+        for (int i = 0; i < n; ++i) {
+			limit = (int)(Math.random() * 10 + 1);
+			cnt = (int)(Math.random() * 5 + 1);
+			
+			if (limit > maxLimit) {
+				maxLimit = limit;
+            }
+			
+			TaskList.add(new Task(limit, cnt));
+        }
+	}
+
+    public Tasks(FileInputStream file) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(file));
+        String str, tmp;
+        TaskList = new LinkedList<Task>();
+        Integer cnt, limit;
+        maxLimit = 0;
+
+        while ((str = br.readLine()) != null) {
+            tmp = str.substring(str.indexOf("NodeCnt=") +
+                "NodeCnt=".length(), str.indexOf(" Connection"));
+
+            cnt = Integer.parseInt(tmp.trim());
+
+            if (cnt.equals(0)) {
+                continue;
+            }
+
+            tmp = str.substring(str.indexOf("TimeLimit=") +
+                "TimeLimit=".length(), str.indexOf(" StartTime"));
+
+            if (tmp.equals("UNLIMITED")) {
+                limit = -1;
+            } else {
+                limit = Integer.parseInt(tmp.trim());
+            }
+            
+            if (limit > maxLimit) {
+				maxLimit = limit;
+            }
+            
+            TaskList.add(new Task(limit, cnt));
+        }
+
+        file.close();
+    }
+
+    public List<Task> getTasks() {
+		Collections.sort(TaskList, new Comparator<Task>() {
+			public int compare(Task a, Task b) {
+			return a.getNodeCnt() - b.getNodeCnt(); }
+		});
+		
+        return TaskList;
+    }
+    
+    public int theta() {
+		return 10 * maxLimit;
+    }
+  
+    private List<Task> TaskList;
+    private int maxLimit;
+  
+    private List<Task> TaskList;
+}
