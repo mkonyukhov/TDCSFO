@@ -17,7 +17,7 @@ public class Tasks {
         maxLimit = 0;
         
         for (int i = 0; i < n; ++i) {
-			limit = (int)(Math.random() * 10 + 1);
+			limit = (int)(Math.random() * 100 + 1);
 			cnt = (int)(Math.random() * 5 + 1);
 			
 			if (limit > maxLimit) {
@@ -73,7 +73,7 @@ public class Tasks {
         return TaskList;
     }
     
-    public int theta() {
+    public int getTheta() {
 		return 10 * maxLimit;
     }
   

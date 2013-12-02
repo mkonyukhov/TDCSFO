@@ -73,12 +73,10 @@ public class Tasks {
         return TaskList;
     }
     
-    public int theta() {
+    public int getTheta() {
 		return 10 * maxLimit;
     }
   
     private List<Task> TaskList;
-    private int maxLimit;
-  
-    private List<Task> TaskList;
+    private int maxLimit;  
 }

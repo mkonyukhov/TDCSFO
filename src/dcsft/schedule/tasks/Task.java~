@@ -28,6 +28,5 @@ public class Task {
 	}
 
 	private int timeLimit;
-	private int nodeCnt;
-	private static int id = 0;
+	private int nodeCnt;	
 }
